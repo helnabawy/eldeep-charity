@@ -96,14 +96,22 @@ export default function DonationSection() {
           </p>
         </div>
 
-        {/* Payment Methods Grid */}
-        <div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+        {/* Payment Methods */}
+        <div
+          className={clsx(
+            "max-w-5xl mx-auto",
+            isRTL
+              ? "flex flex-row-reverse gap-6 overflow-x-auto py-4" // RTL: side-by-side, scrollable
+              : "grid md:grid-cols-3 gap-6"
+          )}
+        >
           {paymentMethods.map((method, index) => (
             <div
               key={method.key}
               className={clsx(
                 "group relative opacity-0",
-                isVisible && "animate-fade-in-up"
+                isVisible && "animate-fade-in-up",
+                isRTL && "flex-shrink-0 min-w-[250px]" // keep a reasonable width
               )}
               style={{ animationDelay: `${0.2 + index * 0.15}s` }}
             >

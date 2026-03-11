@@ -7,6 +7,9 @@ import clsx from 'clsx';
 import { useEffect, useState } from 'react';
 import Image from 'next/image';
 
+// Handle basePath for static exports like GitHub Pages
+const basePath = process.env.NODE_ENV === 'production' ? '/eldeep-charity' : '';
+
 export default function Hero() {
   const t = useTranslations('hero');
   const locale = useLocale();
@@ -22,7 +25,7 @@ export default function Hero() {
       {/* Background Image with Overlay */}
       <div className="absolute inset-0">
         <Image
-          src="/assets/hero-pattern.jpg"
+          src={`${basePath}/assets/hero-pattern.jpg`}
           alt=""
           fill
           className="object-cover"

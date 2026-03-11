@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import { useTranslations, useLocale } from 'next-intl';
 import { useState, useEffect } from 'react';
+import { usePathname, useRouter } from 'next/navigation';
 import { Menu, X, Globe, Heart } from 'lucide-react';
 import clsx from 'clsx';
 
@@ -12,6 +13,8 @@ export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const isRTL = locale === 'ar';
+  const pathname = usePathname();
+  const router = useRouter();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -85,6 +88,12 @@ export default function Header() {
               <a
                 key={link.href}
                 href={link.href}
+                onClick={(e) => {
+                  if (link.href === '#home' && pathname !== `/${locale}`) {
+                    e.preventDefault();
+                    router.push(`/${locale}`);
+                  }
+                }}
                 className={clsx(
                   "relative px-4 py-2 font-medium transition-all duration-300 rounded-full cursor-pointer",
                   isScrolled 
@@ -156,6 +165,13 @@ export default function Header() {
               <a
                 key={link.href}
                 href={link.href}
+                onClick={(e) => {
+                  if (link.href === '#home' && pathname !== `/${locale}`) {
+                    e.preventDefault();
+                    router.push(`/${locale}`);
+                  }
+                  setIsMenuOpen(false);
+                }}
                 className={clsx(
                   "block px-4 py-3 rounded-xl transition-all duration-300 cursor-pointer",
                   isScrolled 
@@ -163,7 +179,6 @@ export default function Header() {
                     : "text-white/90 hover:text-white hover:bg-white/10",
                   isRTL && "font-arabic"
                 )}
-                onClick={() => setIsMenuOpen(false)}
                 style={{ animationDelay: `${index * 0.1}s` }}
               >
                 {link.label}
