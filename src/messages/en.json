@@ -1,0 +1,199 @@
+{
+  "site": {
+    "name": "Al Deeb Charity Foundation",
+    "description": "A charitable foundation serving the community and supporting those in need"
+  },
+  "nav": {
+    "home": "Home",
+    "about": "About Us",
+    "projects": "Projects",
+    "donate": "Donate",
+    "contact": "Contact Us"
+  },
+  "hero": {
+    "title": "Together We Make a Difference",
+    "subtitle": "We strive to serve the community and support those in need through various charitable projects",
+    "cta": "Donate Now",
+    "learnMore": "Learn More"
+  },
+  "about": {
+    "title": "About Us",
+    "subtitle": "Al Deeb Charity Foundation",
+    "mission": {
+      "title": "Our Mission",
+      "description": "We strive to provide comprehensive support to those in need in our community through various programs including orphan sponsorship, feeding the needy, and helping struggling families"
+    },
+    "vision": {
+      "title": "Our Vision",
+      "description": "A cohesive community where everyone supports each other, and help reaches every person in need"
+    },
+    "values": {
+      "title": "Our Values",
+      "transparency": "Transparency",
+      "transparencyDesc": "We commit to full transparency in all our financial operations",
+      "credibility": "Credibility",
+      "credibilityDesc": "We work with honesty and integrity to earn the trust of donors and beneficiaries",
+      "cooperation": "Cooperation",
+      "cooperationDesc": "We believe in the power of teamwork and community collaboration"
+    }
+  },
+  "projects": {
+    "title": "Our Projects",
+    "subtitle": "Various charitable projects serving the community",
+    "viewDetails": "View Details",
+    "goal": "Goal",
+    "raised": "Raised",
+    "categories": {
+      "all": "All",
+      "sponsorship": "Sponsorship",
+      "food": "Food",
+      "clothing": "Clothing",
+      "education": "Education",
+      "health": "Health"
+    },
+    "status": {
+      "active": "Active",
+      "completed": "Completed",
+      "paused": "Paused"
+    }
+  },
+  "donate": {
+    "title": "Donate Now",
+    "subtitle": "Join us in spreading goodness",
+    "methods": {
+      "title": "Donation Methods",
+      "vodafoneCash": "Vodafone Cash",
+      "instapay": "InstaPay",
+      "bankTransfer": "Bank Transfer"
+    },
+    "vodafoneNumber": "Vodafone Cash Number",
+    "instapayLink": "InstaPay Link",
+    "bankInfo": "Bank Information",
+    "bankName": "Bank Name",
+    "accountNumber": "Account Number",
+    "accountName": "Account Holder Name",
+    "iban": "IBAN",
+    "note": "After donating, please contact us for confirmation",
+    "form": {
+      "title": "Record Your Donation",
+      "name": "Name",
+      "phone": "Phone Number",
+      "email": "Email",
+      "amount": "Amount (EGP)",
+      "paymentMethod": "Payment Method",
+      "notes": "Notes",
+      "submit": "Submit",
+      "selectPayment": "Select payment method"
+    }
+  },
+  "contact": {
+    "title": "Contact Us",
+    "subtitle": "We'd love to hear from you",
+    "form": {
+      "name": "Name",
+      "email": "Email",
+      "phone": "Phone",
+      "subject": "Subject",
+      "message": "Message",
+      "submit": "Send"
+    },
+    "info": {
+      "address": "Address",
+      "phone": "Phone",
+      "email": "Email",
+      "workingHours": "Working Hours"
+    },
+    "success": "Your message has been sent successfully. We'll contact you soon."
+  },
+  "stats": {
+    "donors": "Donors",
+    "projects": "Projects",
+    "beneficiaries": "Beneficiaries",
+    "funds": "Funds Raised"
+  },
+  "footer": {
+    "description": "A charitable foundation serving the community and supporting those in need through various charitable projects",
+    "quickLinks": "Quick Links",
+    "contactUs": "Contact Us",
+    "followUs": "Follow Us",
+    "copyright": "All rights reserved © {year} Al Deeb Charity Foundation"
+  },
+  "admin": {
+    "title": "Dashboard",
+    "dashboard": "Dashboard",
+    "donations": "Donations",
+    "projects": "Projects",
+    "inquiries": "Inquiries",
+    "settings": "Settings",
+    "logout": "Logout",
+    "login": "Login",
+    "email": "Email",
+    "password": "Password",
+    "welcome": "Welcome to the Dashboard",
+    "stats": {
+      "totalDonations": "Total Donations",
+      "pendingDonations": "Pending Donations",
+      "totalProjects": "Projects",
+      "unreadInquiries": "Unread Inquiries"
+    },
+    "donationsList": {
+      "title": "Donations List",
+      "donor": "Donor",
+      "amount": "Amount",
+      "method": "Payment Method",
+      "status": "Status",
+      "date": "Date",
+      "actions": "Actions",
+      "confirm": "Confirm",
+      "reject": "Reject",
+      "pending": "Pending",
+      "confirmed": "Confirmed",
+      "rejected": "Rejected"
+    },
+    "projectsList": {
+      "title": "Projects List",
+      "addNew": "Add Project",
+      "edit": "Edit",
+      "delete": "Delete",
+      "titleAr": "Title (Arabic)",
+      "titleEn": "Title (English)",
+      "descriptionAr": "Description (Arabic)",
+      "descriptionEn": "Description (English)",
+      "category": "Category",
+      "status": "Status",
+      "goalAmount": "Goal Amount",
+      "save": "Save",
+      "cancel": "Cancel"
+    },
+    "inquiriesList": {
+      "title": "Inquiries List",
+      "from": "From",
+      "subject": "Subject",
+      "date": "Date",
+      "status": "Status",
+      "reply": "Reply",
+      "markRead": "Mark as Read"
+    },
+    "settings": {
+      "title": "Settings",
+      "siteInfo": "Site Information",
+      "paymentInfo": "Payment Information",
+      "socialMedia": "Social Media",
+      "save": "Save Settings"
+    }
+  },
+  "common": {
+    "loading": "Loading...",
+    "error": "An error occurred",
+    "success": "Success",
+    "save": "Save",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "edit": "Edit",
+    "add": "Add",
+    "search": "Search",
+    "filter": "Filter",
+    "export": "Export",
+    "noData": "No data available"
+  }
+}
