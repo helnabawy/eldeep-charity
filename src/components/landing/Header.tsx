@@ -22,11 +22,11 @@ export default function Header() {
   }, []);
 
   const navLinks = [
-    { href: '/', label: t('home') },
-    { href: '/about', label: t('about') },
-    { href: '/projects', label: t('projects') },
-    { href: '/donate', label: t('donate') },
-    { href: '/contact', label: t('contact') },
+    { href: '#home', label: t('home'), isAnchor: true },
+    { href: '#about', label: t('about'), isAnchor: true },
+    { href: '#projects', label: t('projects'), isAnchor: true },
+    { href: '#donate', label: t('donate'), isAnchor: true },
+    { href: '#contact', label: t('contact'), isAnchor: true },
   ];
 
   const otherLocale = locale === 'ar' ? 'en' : 'ar';
@@ -82,11 +82,11 @@ export default function Header() {
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center gap-1">
             {navLinks.map((link, index) => (
-              <Link
+              <a
                 key={link.href}
-                href={`/${locale}${link.href === '/' ? '' : link.href}`}
+                href={link.href}
                 className={clsx(
-                  "relative px-4 py-2 font-medium transition-all duration-300 rounded-full",
+                  "relative px-4 py-2 font-medium transition-all duration-300 rounded-full cursor-pointer",
                   isScrolled 
                     ? "text-primary-700 hover:text-primary-600 hover:bg-primary-50" 
                     : "text-white/90 hover:text-white hover:bg-white/10",
@@ -94,7 +94,7 @@ export default function Header() {
                 )}
               >
                 {link.label}
-              </Link>
+              </a>
             ))}
           </nav>
 
@@ -153,11 +153,11 @@ export default function Header() {
               : "bg-white/10 backdrop-blur-lg border border-white/20"
           )}>
             {navLinks.map((link, index) => (
-              <Link
+              <a
                 key={link.href}
-                href={`/${locale}${link.href === '/' ? '' : link.href}`}
+                href={link.href}
                 className={clsx(
-                  "block px-4 py-3 rounded-xl transition-all duration-300",
+                  "block px-4 py-3 rounded-xl transition-all duration-300 cursor-pointer",
                   isScrolled 
                     ? "text-primary-700 hover:text-primary-600 hover:bg-white" 
                     : "text-white/90 hover:text-white hover:bg-white/10",
@@ -167,7 +167,7 @@ export default function Header() {
                 style={{ animationDelay: `${index * 0.1}s` }}
               >
                 {link.label}
-              </Link>
+              </a>
             ))}
             {/* Mobile Donate Button */}
             <div className="px-4 pt-4 mt-2 border-t border-white/10">
