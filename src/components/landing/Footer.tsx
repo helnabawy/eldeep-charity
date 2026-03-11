@@ -49,28 +49,18 @@ export default function Footer() {
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-gradient-radial from-secondary-500/5 to-transparent rounded-full" />
       </div>
 
-      {/* Top Wave */}
-      <div className="absolute top-0 left-0 right-0 transform rotate-180">
-        <svg viewBox="0 0 1440 120" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full">
-          <path
-            d="M0 120L60 105C120 90 240 60 360 45C480 30 600 30 720 37.5C840 45 960 60 1080 67.5C1200 75 1320 75 1380 75L1440 75V120H1380C1320 120 1200 120 1080 120C960 120 840 120 720 120C600 120 480 120 360 120C240 120 120 120 60 120H0Z"
-            fill="white"
-          />
-        </svg>
-      </div>
-
-      <div className="container mx-auto px-4 pt-24 pb-8 relative z-10">
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
+      <div className="container mx-auto px-4 pt-16 pb-8 relative z-10">
+        <div className={clsx("grid md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12", isRTL && "lg:grid-flow-col-dense")}>
           {/* Brand Section */}
-          <div className="lg:col-span-1">
-            <Link href={`/${locale}`} className="flex items-center gap-3 mb-6 group">
+          <div className={clsx("lg:col-span-1", isRTL && "lg:col-start-4")}>
+            <Link href={`/${locale}`} className={clsx("flex items-center gap-3 mb-6 group", isRTL && "flex-row-reverse")}>
               <div className="relative w-14 h-14 bg-gradient-to-br from-primary-400 to-primary-600 rounded-2xl flex items-center justify-center shadow-glow-sm group-hover:scale-110 transition-transform duration-300">
                 <Heart className="w-7 h-7 text-white" />
-                <div className="absolute -bottom-1 -right-1 w-5 h-5 bg-secondary-400 rounded-full flex items-center justify-center shadow-gold-glow-sm">
+                <div className={clsx("absolute -bottom-1 w-5 h-5 bg-secondary-400 rounded-full flex items-center justify-center shadow-gold-glow-sm", isRTL ? "-left-1" : "-right-1")}>
                   <span className="text-primary-900 font-bold text-xs">أ</span>
                 </div>
               </div>
-              <div>
+              <div className={clsx(isRTL && "text-right")}>
                 <span className={clsx("font-bold text-xl block", isRTL && "font-arabic")}>
                   {locale === 'ar' ? 'آل الديب' : 'Al Deeb'}
                 </span>
@@ -79,11 +69,11 @@ export default function Footer() {
                 </span>
               </div>
             </Link>
-            <p className={clsx("text-primary-200/80 leading-relaxed mb-6", isRTL && "font-arabic")}>
+            <p className={clsx("text-primary-200/80 leading-relaxed mb-6", isRTL && "font-arabic text-right")}>
               {t('description')}
             </p>
             {/* Social Links */}
-            <div className="flex gap-3">
+            <div className={clsx("flex gap-3", isRTL && "flex-row-reverse justify-end")}>
               {socialLinks.map((social) => (
                 <a
                   key={social.label}
@@ -103,10 +93,10 @@ export default function Footer() {
           </div>
 
           {/* Quick Links */}
-          <div>
-            <h3 className={clsx("text-lg font-bold mb-6 flex items-center gap-2", isRTL && "font-arabic")}>
-              <span className="w-8 h-0.5 bg-gradient-to-r from-secondary-400 to-transparent rounded-full" />
+          <div className={clsx(isRTL && "lg:col-start-3")}>
+            <h3 className={clsx("text-lg font-bold mb-6 flex items-center gap-2", isRTL && "font-arabic flex-row-reverse justify-end")}>
               {t('quickLinks')}
+              <span className={clsx("w-8 h-0.5 rounded-full", isRTL ? "bg-gradient-to-l" : "bg-gradient-to-r", "from-secondary-400 to-transparent")} />
             </h3>
             <ul className="space-y-3">
               {navLinks.map((link, index) => (
@@ -115,12 +105,12 @@ export default function Footer() {
                     href={`/${locale}${link.href === '/' ? '' : link.href}`}
                     className={clsx(
                       "text-primary-200/80 hover:text-secondary-300 transition-all duration-300 flex items-center gap-2 group",
-                      isRTL && "font-arabic flex-row-reverse"
+                      isRTL && "font-arabic flex-row-reverse justify-end"
                     )}
                   >
                     <span className={clsx(
                       "w-1.5 h-1.5 bg-secondary-400/50 rounded-full transition-all duration-300 group-hover:bg-secondary-400 group-hover:scale-150",
-                      isRTL && "order-last"
+                      isRTL ? "order-first" : "order-last"
                     )} />
                     {link.label}
                   </Link>
@@ -130,46 +120,46 @@ export default function Footer() {
           </div>
 
           {/* Contact Info */}
-          <div>
-            <h3 className={clsx("text-lg font-bold mb-6 flex items-center gap-2", isRTL && "font-arabic")}>
-              <span className="w-8 h-0.5 bg-gradient-to-r from-secondary-400 to-transparent rounded-full" />
+          <div className={clsx(isRTL && "lg:col-start-2")}>
+            <h3 className={clsx("text-lg font-bold mb-6 flex items-center gap-2", isRTL && "font-arabic flex-row-reverse justify-end")}>
               {t('contactUs')}
+              <span className={clsx("w-8 h-0.5 rounded-full", isRTL ? "bg-gradient-to-l" : "bg-gradient-to-r", "from-secondary-400 to-transparent")} />
             </h3>
             <ul className="space-y-4">
-              <li className={clsx("flex items-start gap-3 text-primary-200/80", isRTL && "flex-row-reverse")}>
-                <div className="w-10 h-10 bg-white/5 rounded-xl flex items-center justify-center shrink-0">
-                  <MapPin size={18} className="text-secondary-400" />
-                </div>
+              <li className={clsx("flex items-start gap-3 text-primary-200/80", isRTL && "flex-row-reverse justify-end")}>
                 <span className={clsx(isRTL && "font-arabic text-right")}>
                   {locale === 'ar' ? 'المطرية، القاهرة، مصر' : 'Matareya, Cairo, Egypt'}
                 </span>
-              </li>
-              <li className={clsx("flex items-center gap-3 text-primary-200/80", isRTL && "flex-row-reverse")}>
                 <div className="w-10 h-10 bg-white/5 rounded-xl flex items-center justify-center shrink-0">
-                  <Phone size={18} className="text-secondary-400" />
+                  <MapPin size={18} className="text-secondary-400" />
                 </div>
+              </li>
+              <li className={clsx("flex items-center gap-3 text-primary-200/80", isRTL && "flex-row-reverse justify-end")}>
                 <a href="tel:+201012345678" className="hover:text-secondary-300 transition-colors">
                   +20 101 234 5678
                 </a>
-              </li>
-              <li className={clsx("flex items-center gap-3 text-primary-200/80", isRTL && "flex-row-reverse")}>
                 <div className="w-10 h-10 bg-white/5 rounded-xl flex items-center justify-center shrink-0">
-                  <Mail size={18} className="text-secondary-400" />
+                  <Phone size={18} className="text-secondary-400" />
                 </div>
+              </li>
+              <li className={clsx("flex items-center gap-3 text-primary-200/80", isRTL && "flex-row-reverse justify-end")}>
                 <a href="mailto:info@aldeebcharity.org" className="hover:text-secondary-300 transition-colors">
                   info@aldeebcharity.org
                 </a>
+                <div className="w-10 h-10 bg-white/5 rounded-xl flex items-center justify-center shrink-0">
+                  <Mail size={18} className="text-secondary-400" />
+                </div>
               </li>
             </ul>
           </div>
 
           {/* Newsletter */}
-          <div>
-            <h3 className={clsx("text-lg font-bold mb-6 flex items-center gap-2", isRTL && "font-arabic")}>
-              <span className="w-8 h-0.5 bg-gradient-to-r from-secondary-400 to-transparent rounded-full" />
+          <div className={clsx(isRTL && "lg:col-start-1")}>
+            <h3 className={clsx("text-lg font-bold mb-6 flex items-center gap-2", isRTL && "font-arabic flex-row-reverse justify-end")}>
               {locale === 'ar' ? 'النشرة البريدية' : 'Newsletter'}
+              <span className={clsx("w-8 h-0.5 rounded-full", isRTL ? "bg-gradient-to-l" : "bg-gradient-to-r", "from-secondary-400 to-transparent")} />
             </h3>
-            <p className={clsx("text-primary-200/80 mb-4", isRTL && "font-arabic")}>
+            <p className={clsx("text-primary-200/80 mb-4", isRTL && "font-arabic text-right")}>
               {locale === 'ar' ? 'اشترك ليصلك كل جديد' : 'Subscribe to get updates'}
             </p>
             <form className="space-y-3">
@@ -185,7 +175,7 @@ export default function Footer() {
               </div>
               <button
                 type="submit"
-                className="w-full bg-gradient-to-r from-secondary-400 to-secondary-500 text-primary-900 font-bold py-3 rounded-xl shadow-gold-glow-sm hover:shadow-gold-glow-md transition-all duration-300 hover:scale-[1.02]"
+                className={clsx("w-full bg-gradient-to-r from-secondary-400 to-secondary-500 text-primary-900 font-bold py-3 rounded-xl shadow-gold-glow-sm hover:shadow-gold-glow-md transition-all duration-300 hover:scale-[1.02]", isRTL && "font-arabic")}
               >
                 {locale === 'ar' ? 'اشترك الآن' : 'Subscribe'}
               </button>
@@ -197,15 +187,15 @@ export default function Footer() {
         <div className="h-px bg-gradient-to-r from-transparent via-white/20 to-transparent mb-8" />
 
         {/* Bottom Section */}
-        <div className="flex flex-col md:flex-row items-center justify-between gap-4">
+        <div className={clsx("flex flex-col md:flex-row items-center justify-between gap-4", isRTL && "md:flex-row-reverse")}>
           <p className={clsx("text-primary-300/60 text-sm", isRTL && "font-arabic")}>
             {t('copyright', { year: new Date().getFullYear() })}
           </p>
-          <div className="flex items-center gap-6 text-sm text-primary-300/60">
-            <Link href={`/${locale}/privacy`} className="hover:text-secondary-300 transition-colors">
+          <div className={clsx("flex items-center gap-6 text-sm text-primary-300/60", isRTL && "flex-row-reverse")}>
+            <Link href={`/${locale}/privacy`} className={clsx("hover:text-secondary-300 transition-colors", isRTL && "font-arabic")}>
               {locale === 'ar' ? 'سياسة الخصوصية' : 'Privacy Policy'}
             </Link>
-            <Link href={`/${locale}/terms`} className="hover:text-secondary-300 transition-colors">
+            <Link href={`/${locale}/terms`} className={clsx("hover:text-secondary-300 transition-colors", isRTL && "font-arabic")}>
               {locale === 'ar' ? 'الشروط والأحكام' : 'Terms of Service'}
             </Link>
           </div>
@@ -216,7 +206,8 @@ export default function Footer() {
       <button
         onClick={scrollToTop}
         className={clsx(
-          "fixed bottom-8 right-8 w-12 h-12 bg-gradient-to-br from-primary-500 to-primary-600 rounded-full flex items-center justify-center shadow-glow-md transition-all duration-500 hover:scale-110 hover:shadow-glow-lg z-50",
+          "fixed bottom-8 w-12 h-12 bg-gradient-to-br from-primary-500 to-primary-600 rounded-full flex items-center justify-center shadow-glow-md transition-all duration-500 hover:scale-110 hover:shadow-glow-lg z-50",
+          isRTL ? "left-8" : "right-8",
           isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10 pointer-events-none"
         )}
         aria-label="Scroll to top"

@@ -67,7 +67,7 @@ export default function Header() {
                 isScrolled ? "text-primary-900" : "text-white",
                 isRTL && "font-arabic"
               )}>
-                {locale === 'ar' ? 'آل الديب' : 'Al Deeb'}
+                {locale === 'ar' ? 'مؤسسة آل الديب' : 'Al Deeb'}
               </span>
               <span className={clsx(
                 "text-xs transition-colors",

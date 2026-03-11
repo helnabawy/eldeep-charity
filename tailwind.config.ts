@@ -65,11 +65,10 @@ const config: Config = {
         },
       },
       fontFamily: {
-        amiri: ['Amiri', 'serif'],
-        sans: ['Amiri', 'serif'],
-        almarai: ['Almarai', 'sans-serif'],
-        arabic: ['Almarai', 'sans-serif'],
-        display: ['Almarai', 'sans-serif'],
+        almarai: ['var(--font-almarai)', 'sans-serif'],
+        sans: ['var(--font-almarai)', 'sans-serif'],
+        arabic: ['var(--font-almarai)', 'sans-serif'],
+        display: ['var(--font-almarai)', 'sans-serif'],
       },
       animation: {
         'fade-in': 'fadeIn 0.6s ease-out forwards',

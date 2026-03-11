@@ -5,12 +5,12 @@ import { notFound } from 'next/navigation';
 import { locales, Locale } from '@/i18n/request';
 import '@/app/globals.css';
 
-const amiri = localFont({
+const almarai = localFont({
   src: [
-    { path: '../../../fonts/Amiri-Regular.ttf', weight: '400', style: 'normal' },
-    { path: '../../../fonts/Amiri-Bold.ttf', weight: '700', style: 'normal' },
+    { path: '../../../fonts/Almarai-Regular.ttf', weight: '400', style: 'normal' },
+    { path: '../../../fonts/Almarai-Bold.ttf', weight: '700', style: 'normal' },
   ],
-  variable: '--font-amiri',
+  variable: '--font-almarai',
 });
 
 export function generateStaticParams() {
@@ -37,9 +37,9 @@ export default async function LocaleLayout({
     <html
       lang={locale}
       dir={isRTL ? 'rtl' : 'ltr'}
-      className={amiri.className}
+      className={almarai.variable}
     >
-      <body>
+      <body className="font-almarai">
         <NextIntlClientProvider messages={messages}>
           {children}
         </NextIntlClientProvider>

@@ -2,9 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url('https://fonts.googleapis.com/css2?family=Almarai:wght@300;400;700;800&display=swap');
-/* Local Amiri font is loaded via next/font/local; ensure files exist in /public/fonts */
-
 :root {
   /* Green Theme Colors */
   --foreground-rgb: 6, 78, 59;
@@ -34,9 +31,6 @@
   --gold-700: #b45309;
   --gold-800: #92400e;
   --gold-900: #78350f;
-  
-  --font-almarai: 'Almarai', sans-serif;
-  --font-amiri: 'Amiri', serif;
 }
 
 * {
@@ -54,19 +48,17 @@ body {
       rgb(var(--background-start-rgb)) 0%,
       rgb(var(--background-end-rgb)) 100%
     );
-  font-family: var(--font-amiri);
   overflow-x: hidden;
 }
 
 .font-almarai,
 .font-arabic {
-  font-family: var(--font-almarai);
+  font-family: var(--font-almarai), sans-serif;
 }
 
 /* RTL Support */
 [dir="rtl"] {
   text-align: right;
-  font-family: var(--font-almarai);
 }
 
 /* Custom Scrollbar with Green Theme */
