@@ -55,7 +55,8 @@
       "active": "Active",
       "completed": "Completed",
       "paused": "Paused"
-    }
+    },
+    "noProjects": "No projects available"
   },
   "donate": {
     "title": "Donate Now",

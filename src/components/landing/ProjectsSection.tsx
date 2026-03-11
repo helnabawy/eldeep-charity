@@ -7,7 +7,7 @@ import { ArrowRight, Sparkles, Heart, Utensils, Shirt, BookOpen, Stethoscope, Us
 import clsx from 'clsx';
 import { useState, useEffect, useRef } from 'react';
 
-interface Project {
+export interface Project {
   id: string;
   titleAr: string;
   titleEn: string;
@@ -35,18 +35,21 @@ const categoryColors: Record<string, string> = {
   health: 'from-red-500 to-pink-500',
 };
 
-export default function ProjectsSection() {
+interface ProjectsSectionProps {
+  projects?: Project[];
+}
+
+export default function ProjectsSection({ projects: initialProjects = [] }: ProjectsSectionProps) {
   const t = useTranslations('projects');
   const locale = useLocale();
   const isRTL = locale === 'ar';
-  const [projects, setProjects] = useState<Project[]>([]);
-  const [loading, setLoading] = useState(true);
   const [isVisible, setIsVisible] = useState(false);
   const sectionRef = useRef<HTMLElement>(null);
 
-  useEffect(() => {
-    fetchProjects();
-  }, []);
+  // Filter projects to only show active ones and limit to 6
+  const projects = initialProjects
+    .filter((p) => p.status === 'ACTIVE')
+    .slice(0, 6);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -64,18 +67,6 @@ export default function ProjectsSection() {
 
     return () => observer.disconnect();
   }, []);
-
-  const fetchProjects = async () => {
-    try {
-      const response = await fetch('/api/projects');
-      const data = await response.json();
-      setProjects(data.filter((p: Project) => p.status === 'ACTIVE').slice(0, 6));
-    } catch (error) {
-      console.error('Error fetching projects:', error);
-    } finally {
-      setLoading(false);
-    }
-  };
 
   return (
     <section ref={sectionRef} className="py-20 relative overflow-hidden" id="projects">
@@ -112,11 +103,7 @@ export default function ProjectsSection() {
           </p>
         </div>
 
-        {loading ? (
-          <div className="flex justify-center py-12">
-            <div className="spinner" />
-          </div>
-        ) : projects.length > 0 ? (
+        {projects.length > 0 ? (
           <>
             {/* Projects Grid */}
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -249,7 +236,7 @@ export default function ProjectsSection() {
               <Users size={32} className="text-gray-400" />
             </div>
             <p className={clsx("text-gray-500", isRTL && "font-arabic")}>
-              {locale === 'ar' ? 'لا توجد مشاريع متاحة حالياً' : 'No projects available'}
+              {t('noProjects')}
             </p>
           </div>
         )}

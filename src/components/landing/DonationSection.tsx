@@ -96,7 +96,7 @@ export default function DonationSection() {
           </p>
         </div>
 
-        {/* Payment Methods */}
+t        {/* Payment Methods */}
         <div
           className={clsx(
             "max-w-5xl mx-auto",
