@@ -4,6 +4,7 @@ import { useTranslations, useLocale } from 'next-intl';
 import clsx from 'clsx';
 import { useEffect, useState, useRef } from 'react';
 import { Play, Pause, Volume2, VolumeX, MapPin, ExternalLink } from 'lucide-react';
+import { basePath } from '@/config/constants';
 
 const MOSQUE_LOCATION_URL = 'https://www.google.com/maps/place/New+Administrative+Capital,+Cairo+Governorate+Desert,+Cairo+Governorate+4823401/@30.0282441,31.6785358,966m/data=!3m1!1e3!4m15!1m8!3m7!1s0x1457f4e36df84c5f:0x38e74a34f5f6f94a!2sNew+Administrative+Capital,+Cairo+Governorate+Desert,+Cairo+Governorate+4823401!3b1!8m2!3d30.0282441!4d31.6785358!16s%2Fg%2F11tk60tfn9!3m5!1s0x1457f4e36df84c5f:0x38e74a34f5f6f94a!8m2!3d30.0282441!4d31.6785358!16s%2Fg%2F11tk60tfn9!18m1!1e1?entry=ttu&g_ep=EgoyMDI2MDMyNC4wIKXMDSoASAFQAw%3D%3D';
 
@@ -98,9 +99,9 @@ export default function MosqueSection() {
               muted={isMuted}
               loop
               playsInline
-              poster="/assets/mosque.jpg"
+              poster={`${basePath}/assets/mosque.jpg`}
             >
-              <source src="/assets/mosque.mp4" type="video/mp4" />
+              <source src={`${basePath}/assets/logo.png`} type="video/mp4" />
               {t('videoNotSupported')}
             </video>
 

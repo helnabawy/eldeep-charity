@@ -7,8 +7,7 @@ import { useState, useEffect } from 'react';
 import { usePathname, useRouter } from 'next/navigation';
 import { Menu, X, Globe } from 'lucide-react';
 import clsx from 'clsx';
-// Handle basePath for static exports like GitHub Pages
-const basePath = process.env.NODE_ENV === 'production' ? '/eldeep-charity' : '';
+import { basePath } from '@/config/constants';
 
 export default function Header() {
   const t = useTranslations('nav');

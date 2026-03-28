@@ -6,9 +6,7 @@ import { Button } from '@/components/ui';
 import clsx from 'clsx';
 import { useEffect, useState } from 'react';
 import Image from 'next/image';
-
-// Handle basePath for static exports like GitHub Pages
-const basePath = process.env.NODE_ENV === 'production' ? '/eldeep-charity' : '';
+import { basePath } from '@/config/constants';
 
 export default function Hero() {
   const t = useTranslations('hero');
