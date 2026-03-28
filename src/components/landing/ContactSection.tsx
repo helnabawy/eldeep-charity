@@ -1,8 +1,7 @@
 'use client';
 
 import { useTranslations, useLocale } from 'next-intl';
-import { Card, Button, Input, Textarea } from '@/components/ui';
-import { MapPin, Phone, Mail, Clock, Send, MessageCircle, Sparkles, CheckCircle } from 'lucide-react';
+import { MapPin, Phone, Mail, Clock, Send, MessageCircle, CheckCircle } from 'lucide-react';
 import clsx from 'clsx';
 import { useState, useEffect, useRef } from 'react';
 

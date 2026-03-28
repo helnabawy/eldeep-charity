@@ -2,7 +2,6 @@
 
 import Link from 'next/link';
 import { useTranslations, useLocale } from 'next-intl';
-import { Card, Button } from '@/components/ui';
 import { ArrowRight, Sparkles, Heart, Utensils, Shirt, BookOpen, Stethoscope, Users } from 'lucide-react';
 import clsx from 'clsx';
 import { useState, useEffect, useRef } from 'react';

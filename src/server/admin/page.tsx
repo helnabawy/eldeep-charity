@@ -15,13 +15,22 @@ import {
   ResponsiveContainer,
 } from 'recharts';
 
+interface RecentDonation {
+  id: string;
+  donorName?: string;
+  amount: number;
+  paymentMethod: string;
+  status: 'CONFIRMED' | 'PENDING' | 'FAILED' | string;
+  createdAt: string;
+}
+
 interface Stats {
   totalDonations: number;
   pendingDonations: number;
   totalProjects: number;
   unreadInquiries: number;
   totalAmount: number;
-  recentDonations: any[];
+  recentDonations: RecentDonation[];
 }
 
 export default function AdminDashboard() {
@@ -151,7 +160,7 @@ export default function AdminDashboard() {
                 </tr>
               </thead>
               <tbody>
-                {stats?.recentDonations?.map((donation: any) => (
+                {stats?.recentDonations?.map((donation) => (
                   <tr key={donation.id} className="border-b">
                     <td className="py-3">{donation.donorName || 'Anonymous'}</td>
                     <td className="py-3">{donation.amount} EGP</td>

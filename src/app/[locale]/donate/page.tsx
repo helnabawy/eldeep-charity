@@ -1,7 +1,7 @@
 'use client';
 
 import { useTranslations, useLocale } from 'next-intl';
-import { Header, Footer, DonationSection } from '@/components/landing';
+import { Header, Footer } from '@/components/landing';
 import { Card, Button, Input, Select } from '@/components/ui';
 import { Smartphone, Link2, Building2, Copy, Check } from 'lucide-react';
 import clsx from 'clsx';

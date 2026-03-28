@@ -1,6 +1,6 @@
 'use client';
 
-import { useTranslations, useLocale } from 'next-intl';
+import { useLocale } from 'next-intl';
 import { Header, Footer, ContactSection } from '@/components/landing';
 import clsx from 'clsx';
 

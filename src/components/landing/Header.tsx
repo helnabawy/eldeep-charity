@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { useTranslations, useLocale } from 'next-intl';
 import { useState, useEffect } from 'react';
 import { usePathname, useRouter } from 'next/navigation';
-import { Menu, X, Globe, Heart } from 'lucide-react';
+import { Menu, X, Globe } from 'lucide-react';
 import clsx from 'clsx';
 
 export default function Header() {
@@ -74,7 +74,7 @@ export default function Header() {
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center gap-1">
-            {navLinks.map((link, index) => (
+            {navLinks.map((link) => (
               <a
                 key={link.href}
                 href={link.href}

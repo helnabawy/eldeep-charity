@@ -4,9 +4,8 @@ import { useEffect, useState } from 'react';
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 import { AdminLayout } from '@/components/admin';
-import { Button, Input } from '@/components/ui';
+import { Button } from '@/components/ui';
 import { Eye, X, Send } from 'lucide-react';
-
 interface Inquiry {
   id: string;
   name: string;

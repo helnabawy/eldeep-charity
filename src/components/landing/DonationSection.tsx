@@ -45,7 +45,7 @@ export default function DonationSection() {
       value: paymentConfig.instapay.link,
       hasInstructions: true,
     },
-    ...bankTransferList.map((bank, index) => ({
+    ...bankTransferList.map((bank) => ({
       key: `تحويل بنكي`,
       icon: Building2,
       iconBg: 'bg-gradient-to-br from-blue-400 to-indigo-500',

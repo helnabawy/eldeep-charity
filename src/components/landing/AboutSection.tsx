@@ -4,7 +4,6 @@ import { useTranslations, useLocale } from 'next-intl';
 import { Target, Eye, Heart, Sparkles, Shield, Users } from 'lucide-react';
 import clsx from 'clsx';
 import { useEffect, useRef, useState } from 'react';
-import Image from 'next/image';
 
 export default function AboutSection() {
   const t = useTranslations('about');
@@ -158,7 +157,7 @@ export default function AboutSection() {
                 {t('values.title')}
               </h3>
               <ul className={clsx("space-y-3", isRTL ? "text-right" : "text-left")} dir={isRTL ? "rtl" : "ltr"}>
-                {values.map((value, index) => (
+                {values.map((value) => (
                   <li 
                     key={value.key} 
                     className={clsx(
