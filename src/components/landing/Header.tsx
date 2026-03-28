@@ -7,6 +7,8 @@ import { useState, useEffect } from 'react';
 import { usePathname, useRouter } from 'next/navigation';
 import { Menu, X, Globe } from 'lucide-react';
 import clsx from 'clsx';
+// Handle basePath for static exports like GitHub Pages
+const basePath = process.env.NODE_ENV === 'production' ? '/eldeep-charity' : '';
 
 export default function Header() {
   const t = useTranslations('nav');
@@ -53,7 +55,7 @@ export default function Header() {
             className="flex items-center gap-3 group"
           >
             {/* Add logo image */}
-              <Image src="/assets/logo.png" alt="Al Deeb Logo" width={40} height={40} className="rounded-full group-hover:animate-pulse" />
+              <Image src={`${basePath}/assets/logo.png`} alt="Al Deeb Logo" width={40} height={40} className="rounded-full group-hover:animate-pulse" />
             <div className="flex flex-col">
               <span className={clsx(
                 "font-bold text-lg transition-colors",
