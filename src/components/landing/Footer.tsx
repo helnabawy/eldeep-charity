@@ -128,7 +128,7 @@ export default function Footer() {
             <ul className="space-y-4">
               <li className={clsx("flex items-start gap-3 text-primary-200/80", isRTL && "flex-row-reverse justify-end")}>
                 <span className={clsx(isRTL && "font-arabic text-right")}>
-                  {locale === 'ar' ? 'المطرية، القاهرة، مصر' : 'Matareya, Cairo, Egypt'}
+                  {locale === 'ar' ? ' الدقهلية ميت غمر كفر المقدام  ' : 'Matareya, Cairo, Egypt'}
                 </span>
                 <div className="w-10 h-10 bg-white/5 rounded-xl flex items-center justify-center shrink-0">
                   <MapPin size={18} className="text-secondary-400" />

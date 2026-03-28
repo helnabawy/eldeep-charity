@@ -3,9 +3,10 @@
 import { useTranslations, useLocale } from 'next-intl';
 import { Header, Footer } from '@/components/landing';
 import { Card, Button, Input, Select } from '@/components/ui';
-import { Smartphone, Link2, Building2, Copy, Check } from 'lucide-react';
+import { Link2, Building2, Copy, Check, ExternalLink, ListChecks, ChevronUp, ChevronDown } from 'lucide-react';
 import clsx from 'clsx';
 import { useState } from 'react';
+import paymentConfig from '@/config/payment.json';
 
 export default function DonatePage() {
   const t = useTranslations('donate');
@@ -14,12 +15,57 @@ export default function DonatePage() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
   const [copied, setCopied] = useState<string | null>(null);
+  const [showInstructions, setShowInstructions] = useState<Record<string, boolean>>({});
 
-  const paymentMethods = [
-    { key: 'vodafone_cash', value: 'vodafone_cash' },
-    { key: 'instapay', value: 'instapay' },
-    { key: 'bank_transfer', value: 'bank_transfer' },
+  interface BankTransferEntry {
+    bankName: { en: string; ar: string };
+    accountNumber: string;
+    accountName: { en: string; ar: string };
+    iban: string;
+    swiftCode: string;
+  }
+
+  const bankTransferList: BankTransferEntry[] = paymentConfig.bankTransfer ?? [];
+
+  interface PaymentMethodBase {
+    key: string;
+    icon: typeof Link2 | typeof Building2;
+    iconBg: string;
+    value: string | null;
+    hasInstructions: boolean;
+    bank?: BankTransferEntry;
+  }
+
+  const paymentMethods: PaymentMethodBase[] = [
+    {
+      key: 'instapay',
+      icon: Link2,
+      iconBg: 'bg-gradient-to-br from-purple-400 to-violet-500',
+      value: paymentConfig.instapay.link,
+      hasInstructions: true,
+    },
+    ...bankTransferList.map((bank) => ({
+      key: bank.bankName.en,
+      icon: Building2,
+      iconBg: 'bg-gradient-to-br from-indigo-400 to-blue-500',
+      value: null,
+      hasInstructions: false,
+      bank,
+    })),
   ];
+
+  const getBankName = (bank: BankTransferEntry) => (locale === 'ar' ? bank.bankName.ar : bank.bankName.en);
+  const getAccountName = (bank: BankTransferEntry) => (locale === 'ar' ? bank.accountName.ar : bank.accountName.en);
+  const getInstructions = (key: string) => {
+    if (key === 'instapay') {
+      return locale === 'ar' ? paymentConfig.instapay.instructions.ar : paymentConfig.instapay.instructions.en;
+    }
+    return [];
+  };
+
+  const toggleInstructions = (key: string) => {
+    setShowInstructions((prev) => ({ ...prev, [key]: !prev[key] }));
+  };
 
   const copyToClipboard = (text: string, key: string) => {
     navigator.clipboard.writeText(text);
@@ -83,64 +129,67 @@ export default function DonatePage() {
             </h2>
 
             <div className="grid md:grid-cols-3 gap-6 max-w-4xl mx-auto mb-12">
-              {/* Vodafone Cash */}
-              <Card className="p-6 text-center">
-                <div className="inline-flex items-center justify-center w-16 h-16 bg-red-100 text-red-600 rounded-full mb-4">
-                  <Smartphone size={32} />
-                </div>
-                <h3 className={clsx("text-xl font-bold text-gray-800 mb-2", isRTL && "font-arabic")}>
-                  {t('methods.vodafoneCash')}
-                </h3>
-                <div className="bg-gray-50 rounded-lg p-3 mb-3">
-                  <code className="text-lg font-bold text-gray-700">01012345678</code>
-                </div>
-                <button
-                  onClick={() => copyToClipboard('01012345678', 'vodafone')}
-                  className="flex items-center justify-center gap-2 text-primary-600 hover:text-primary-700 mx-auto"
-                >
-                  {copied === 'vodafone' ? <Check size={16} /> : <Copy size={16} />}
-                  <span className="text-sm">
-                    {copied === 'vodafone' ? (isRTL ? 'تم النسخ!' : 'Copied!') : (isRTL ? 'نسخ' : 'Copy')}
-                  </span>
-                </button>
-              </Card>
+              {paymentMethods.map((method) => (
+                <Card key={method.key} className="p-6 text-center">
+                  <div className={clsx("inline-flex items-center justify-center w-16 h-16 rounded-full mb-4", method.iconBg)}>
+                    <method.icon size={32} />
+                  </div>
+                  <h3 className={clsx("text-xl font-bold text-gray-800 mb-2", isRTL && "font-arabic")}>
+                    {method.key === 'instapay'
+                      ? t('methods.instapay')
+                      : method.bank
+                      ? getBankName(method.bank)
+                      : method.key}
+                  </h3>
 
-              {/* InstaPay */}
-              <Card className="p-6 text-center">
-                <div className="inline-flex items-center justify-center w-16 h-16 bg-purple-100 text-purple-600 rounded-full mb-4">
-                  <Link2 size={32} />
-                </div>
-                <h3 className={clsx("text-xl font-bold text-gray-800 mb-2", isRTL && "font-arabic")}>
-                  {t('methods.instapay')}
-                </h3>
-                <div className="bg-gray-50 rounded-lg p-3 mb-3">
-                  <code className="text-sm text-gray-700 break-all">https://ipn.eg/alddeeb</code>
-                </div>
-                <button
-                  onClick={() => copyToClipboard('https://ipn.eg/alddeeb', 'instapay')}
-                  className="flex items-center justify-center gap-2 text-primary-600 hover:text-primary-700 mx-auto"
-                >
-                  {copied === 'instapay' ? <Check size={16} /> : <Copy size={16} />}
-                  <span className="text-sm">
-                    {copied === 'instapay' ? (isRTL ? 'تم النسخ!' : 'Copied!') : (isRTL ? 'نسخ' : 'Copy')}
-                  </span>
-                </button>
-              </Card>
-
-              {/* Bank Transfer */}
-              <Card className="p-6 text-center">
-                <div className="inline-flex items-center justify-center w-16 h-16 bg-blue-100 text-blue-600 rounded-full mb-4">
-                  <Building2 size={32} />
-                </div>
-                <h3 className={clsx("text-xl font-bold text-gray-800 mb-2", isRTL && "font-arabic")}>
-                  {t('methods.bankTransfer')}
-                </h3>
-                <div className={clsx("text-sm text-gray-600 space-y-1", isRTL && "font-arabic text-right")}>
-                  <p><strong>{t('bankName')}:</strong> بنك مصر</p>
-                  <p><strong>{t('accountNumber')}:</strong> 1234567890</p>
-                  <p><strong>{t('accountName')}:</strong> {locale === 'ar' ? 'مؤسسة آل الديب الخيرية' : 'Al Deeb Charity Foundation'}</p>
-                </div>
-              </Card>
+                  {method.key === 'instapay' && method.value ? (
+                    <>
+                      <div className="bg-gray-50 rounded-lg p-3 mb-3">
+                        <code className="text-sm text-gray-700 break-all">{method.value}</code>
+                      </div>
+                      <div className="flex gap-2 justify-center">
+                        <button
+                          onClick={() => copyToClipboard(method.value!, 'instapay')}
+                          className="flex items-center gap-2 text-primary-600 hover:text-primary-700"
+                        >
+                          {copied === 'instapay' ? <Check size={16} /> : <Copy size={16} />}
+                          <span className="text-sm">{copied === 'instapay' ? (isRTL ? 'تم النسخ!' : 'Copied!') : (isRTL ? 'نسخ' : 'Copy')}</span>
+                        </button>
+                        <a
+                          href={method.value}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="flex items-center gap-2 text-primary-600 hover:text-primary-700"
+                        >
+                          <ExternalLink size={16} />
+                          <span className="text-sm">{isRTL ? 'فتح' : 'Open'}</span>
+                        </a>
+                      </div>
+                      <button
+                        onClick={() => toggleInstructions('instapay')}
+                        className="mt-3 flex items-center justify-center gap-2 text-sm text-primary-700"
+                      >
+                        <ListChecks size={16} />
+                        {isRTL ? 'تعليمات' : 'Instructions'}
+                        {showInstructions['instapay'] ? <ChevronUp size={16} /> : <ChevronDown size={16} />}
+                      </button>
+                      {showInstructions['instapay'] && (
+                        <ul className="mt-2 text-sm text-gray-600 text-left space-y-1">
+                          {getInstructions('instapay').map((item, idx) => (
+                            <li key={idx}>{item}</li>
+                          ))}
+                        </ul>
+                      )}
+                    </>
+                  ) : method.bank ? (
+                    <div className={clsx("text-sm text-gray-600 space-y-1", isRTL && "font-arabic text-right")}> 
+                      <p><strong>{t('bankName')}:</strong> {getBankName(method.bank)}</p>
+                      <p><strong>{t('accountNumber')}:</strong> {method.bank.accountNumber}</p>
+                      <p><strong>{t('accountName')}:</strong> {getAccountName(method.bank)}</p>
+                    </div>
+                  ) : null}
+                </Card>
+              ))}
             </div>
 
             {/* Donation Form */}
@@ -186,10 +235,14 @@ export default function DonatePage() {
                   <Select
                     name="paymentMethod"
                     label={t('form.paymentMethod')}
-                    options={paymentMethods.map((m) => ({
-                      value: m.value,
-                      label: t(`methods.${m.key === 'vodafone_cash' ? 'vodafoneCash' : m.key}`),
-                    }))}
+                    options={paymentMethods
+                      .filter((m): m is (typeof m & { value: string }) => Boolean(m.value))
+                      .map((m) => ({
+                        value: m.key,
+                        label: m.key === 'instapay'
+                          ? t('methods.instapay')
+                          : t('methods.bankTransfer'),
+                      }))}
                     required
                   />
                   <Input

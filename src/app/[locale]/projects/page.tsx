@@ -4,7 +4,7 @@ import { useTranslations, useLocale } from 'next-intl';
 import { Header, Footer } from '@/components/landing';
 import { Card, Button } from '@/components/ui';
 import clsx from 'clsx';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 
 interface Project {
   id: string;
@@ -17,6 +17,43 @@ interface Project {
   goalAmount: number | null;
   raisedAmount: number;
 }
+
+// Static project data for static export
+const staticProjects: Project[] = [
+  {
+    id: '1',
+    titleAr: 'كفالة الأيتام',
+    titleEn: 'Orphan Sponsorship',
+    descriptionAr: 'برنامج كفالة الأيتام وتوفير احتياجاتهم الأساسية',
+    descriptionEn: 'Orphan sponsorship program providing for their basic needs',
+    category: 'sponsorship',
+    status: 'ACTIVE',
+    goalAmount: 100000,
+    raisedAmount: 45000,
+  },
+  {
+    id: '2',
+    titleAr: 'إطعام الطعام',
+    titleEn: 'Food Distribution',
+    descriptionAr: 'توزيع الطعام على الأسر المحتاجة',
+    descriptionEn: 'Distributing food to families in need',
+    category: 'food',
+    status: 'ACTIVE',
+    goalAmount: 50000,
+    raisedAmount: 25000,
+  },
+  {
+    id: '3',
+    titleAr: 'بناء المساجد',
+    titleEn: 'Mosque Construction',
+    descriptionAr: 'بناء وتجديد المساجد',
+    descriptionEn: 'Building and renovating mosques',
+    category: 'sponsorship',
+    status: 'ACTIVE',
+    goalAmount: 500000,
+    raisedAmount: 150000,
+  },
+];
 
 const categories = [
   { key: 'all', value: 'all' },
@@ -31,29 +68,11 @@ export default function ProjectsPage() {
   const t = useTranslations('projects');
   const locale = useLocale();
   const isRTL = locale === 'ar';
-  const [projects, setProjects] = useState<Project[]>([]);
   const [selectedCategory, setSelectedCategory] = useState('all');
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    fetchProjects();
-  }, []);
-
-  const fetchProjects = async () => {
-    try {
-      const response = await fetch('/api/projects');
-      const data = await response.json();
-      setProjects(data);
-    } catch (error) {
-      console.error('Error fetching projects:', error);
-    } finally {
-      setLoading(false);
-    }
-  };
 
   const filteredProjects = selectedCategory === 'all'
-    ? projects
-    : projects.filter((p) => p.category === selectedCategory);
+    ? staticProjects
+    : staticProjects.filter((p) => p.category === selectedCategory);
 
   return (
     <>
@@ -92,11 +111,7 @@ export default function ProjectsPage() {
         {/* Projects Grid */}
         <section className="py-16 bg-white">
           <div className="container mx-auto px-4">
-            {loading ? (
-              <div className="text-center py-12">
-                <p className={clsx("text-gray-500", isRTL && "font-arabic")}>Loading...</p>
-              </div>
-            ) : filteredProjects.length > 0 ? (
+            {filteredProjects.length > 0 ? (
               <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {filteredProjects.map((project) => (
                   <Card key={project.id} className="overflow-hidden hover:shadow-lg transition-shadow">
@@ -114,7 +129,7 @@ export default function ProjectsPage() {
                         "inline-block px-2 py-1 text-xs rounded-full mb-2",
                         project.status === 'ACTIVE' && "bg-green-100 text-green-700",
                         project.status === 'COMPLETED' && "bg-blue-100 text-blue-700",
-                        project.status === 'PAUSED' && "bg-yellow-100 text-yellow-700"
+                        project.status === 'PAUSED' && "bg-yellow-100 text-yellow-700",
                       )}>
                         {t(`status.${project.status.toLowerCase()}`)}
                       </span>
@@ -138,7 +153,7 @@ export default function ProjectsPage() {
                             <div
                               className="h-full bg-primary-500 rounded-full"
                               style={{
-                                width: `${Math.min((project.raisedAmount / project.goalAmount) * 100, 100)}%`
+                                width: `${Math.min((project.raisedAmount / project.goalAmount) * 100, 100)}%`,
                               }}
                             />
                           </div>

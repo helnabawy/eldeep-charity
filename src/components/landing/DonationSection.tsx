@@ -1,6 +1,6 @@
 'use client';
 
-import { Smartphone, Link2, Building2, Copy, Check, Heart, Sparkles, CreditCard, Wallet, ExternalLink, ChevronDown, ChevronUp, ListChecks } from 'lucide-react';
+import { Building2, Copy, Check, Heart, Sparkles, CreditCard, Wallet, ExternalLink, ChevronDown, ChevronUp, ListChecks } from 'lucide-react';
 import clsx from 'clsx';
 import { useState, useEffect, useRef } from 'react';
 import { useTranslations, useLocale } from 'next-intl';
@@ -18,35 +18,27 @@ export default function DonationSection() {
     swiftCode: string;
   }
 
-  type PaymentMethod =
-    | {
-        key: 'instapay' | 'vodafoneCash';
-        icon: typeof Link2 | typeof Smartphone;
-        iconBg: string;
-        value: string;
-        hasInstructions: true;
-      }
-    | {
-        key: string;
-        icon: typeof Building2;
-        iconBg: string;
-        value: null;
-        hasInstructions: boolean;
-        bank: BankTransferEntry;
-      };
+  interface PaymentMethod {
+    key: string;
+    icon: typeof Building2;
+    iconBg: string;
+    value: string | null;
+    hasInstructions: boolean;
+    bank?: BankTransferEntry;
+  }
 
   const bankTransferList: BankTransferEntry[] = paymentConfig.bankTransfer ?? [];
 
   const paymentMethods: PaymentMethod[] = [
     {
       key: 'instapay',
-      icon: Link2,
+      icon: Building2,
       iconBg: 'bg-gradient-to-br from-purple-400 to-violet-500',
       value: paymentConfig.instapay.link,
       hasInstructions: true,
     },
-    ...bankTransferList.map((bank) => ({
-      key: `تحويل بنكي`,
+    ...bankTransferList.map((bank, idx) => ({
+      key: `bank-${idx}`,
       icon: Building2,
       iconBg: 'bg-gradient-to-br from-blue-400 to-indigo-500',
       value: null,
@@ -102,7 +94,7 @@ export default function DonationSection() {
       : bank.accountName.en;
   };
 
-  const getInstructions = (key: string) => {
+  const getInstructions = (key: string): string[] => {
     if (key === 'instapay') {
       return locale === 'ar' 
         ? paymentConfig.instapay.instructions.ar 
@@ -178,7 +170,7 @@ export default function DonationSection() {
                   "text-base font-bold text-white mb-3",
                   isRTL && "font-arabic"
                 )}>
-                  {method.key}
+                  {method.key === 'instapay' ? t('methods.instapay') : t('methods.bankTransfer')}
                 </h3>
 
                 {/* Content */}
@@ -194,7 +186,7 @@ export default function DonationSection() {
                     {/* Action Buttons */}
                     <div className="flex gap-2 mb-3">
                       <button
-                        onClick={() => copyToClipboard(method.value!, method.key)}
+                        onClick={() => method.value && copyToClipboard(method.value, method.key)}
                         className={clsx(
                           "flex-1 flex items-center justify-center gap-2 px-3 py-2 rounded-xl transition-all duration-300 text-sm",
                           copied === method.key 
@@ -273,50 +265,48 @@ export default function DonationSection() {
                     )}
                   </div>
                 ) : (
-                  <div className={clsx(
-                    "flex-1 space-y-3 text-white/80",
-                    isRTL && "font-arabic text-right"
-                  )}>
-                    {'bank' in method && method.bank ? (
-                      <>
-                        <div className="bg-white/10 backdrop-blur-sm rounded-xl p-3 border border-white/10">
-                          <div className="flex items-center gap-2 mb-1">
-                            <Building2 size={14} className="text-secondary-400" />
-                            <span className="text-xs text-white/60">{t('bankName')}</span>
-                          </div>
-                          <p className="font-semibold text-sm">{getBankName(method.bank)}</p>
+                  'bank' in method && method.bank ? (
+                    <div className={clsx(
+                      "flex-1 space-y-3 text-white/80",
+                      isRTL && "font-arabic text-right"
+                    )}>
+                      <div className="bg-white/10 backdrop-blur-sm rounded-xl p-3 border border-white/10">
+                        <div className="flex items-center gap-2 mb-1">
+                          <Building2 size={14} className="text-secondary-400" />
+                          <span className="text-xs text-white/60">{t('bankName')}</span>
                         </div>
-                        <div className="bg-white/10 backdrop-blur-sm rounded-xl p-3 border border-white/10">
-                          <div className="flex items-center gap-2 mb-1">
-                            <CreditCard size={14} className="text-secondary-400" />
-                            <span className="text-xs text-white/60">{t('accountNumber')}</span>
-                          </div>
-                          <div className="flex items-center justify-between">
-                            <p className="font-mono font-semibold text-sm">{method.bank.accountNumber}</p>
-                            <button
-                              onClick={() => copyToClipboard(method.bank.accountNumber, method.key)}
-                              className="p-1.5 rounded-lg bg-white/10 hover:bg-white/20 transition-colors"
-                            >
-                              {copied === method.key ? (
-                                <Check size={14} className="text-secondary-400" />
-                              ) : (
-                                <Copy size={14} className="text-white/60" />
-                              )}
-                            </button>
-                          </div>
+                        <p className="font-semibold text-sm">{getBankName(method.bank)}</p>
+                      </div>
+                      <div className="bg-white/10 backdrop-blur-sm rounded-xl p-3 border border-white/10">
+                        <div className="flex items-center gap-2 mb-1">
+                          <CreditCard size={14} className="text-secondary-400" />
+                          <span className="text-xs text-white/60">{t('accountNumber')}</span>
                         </div>
-                        <div className="bg-white/10 backdrop-blur-sm rounded-xl p-3 border border-white/10">
-                          <div className="flex items-center gap-2 mb-1">
-                            <Wallet size={14} className="text-secondary-400" />
-                            <span className="text-xs text-white/60">{t('accountName')}</span>
-                          </div>
-                          <p className="font-semibold text-xs">{getAccountName(method.bank)}</p>
+                        <div className="flex items-center justify-between">
+                          <p className="font-mono font-semibold text-sm">{method.bank?.accountNumber}</p>
+                          <button
+                            onClick={() => method.bank && copyToClipboard(method.bank.accountNumber, method.key)}
+                            className="p-1.5 rounded-lg bg-white/10 hover:bg-white/20 transition-colors"
+                          >
+                            {copied === method.key ? (
+                              <Check size={14} className="text-secondary-400" />
+                            ) : (
+                              <Copy size={14} className="text-white/60" />
+                            )}
+                          </button>
                         </div>
-                      </>
-                    ) : (
-                      <p className="text-xs text-white/70">{t('bankInfo')}</p>
-                    )}
-                  </div>
+                      </div>
+                      <div className="bg-white/10 backdrop-blur-sm rounded-xl p-3 border border-white/10">
+                        <div className="flex items-center gap-2 mb-1">
+                          <Wallet size={14} className="text-secondary-400" />
+                          <span className="text-xs text-white/60">{t('accountName')}</span>
+                        </div>
+                        <p className="font-semibold text-xs">{getAccountName(method.bank)}</p>
+                      </div>
+                    </div>
+                  ) : (
+                    <p className="text-xs text-white/70">{t('bankInfo')}</p>
+                  )
                 )}
               </div>
             </div>

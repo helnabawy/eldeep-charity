@@ -311,16 +311,12 @@ export default function ContactSection() {
               style={{ animationDelay: '0.5s' }}
             >
               <div className="absolute inset-0 bg-gradient-to-br from-primary-500/20 to-secondary-500/20 pointer-events-none z-10" />
-              <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3454.5!2d31.3247!3d30.1319!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMzDCsDA3JzU0LjgiTiAzMcKwMTknMjguOSJF!5e0!3m2!1sen!2seg!4v1234567890"
-                width="100%"
+             
+             <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1057.9733445733225!2d31.355439490928735!3d30.675901108128276!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14f7edd54bf31205%3A0x314277db32816bb8!2z2YXYs9is2K8g2KfZhNi02YfZitivINir2KfYqNiq!5e1!3m2!1sen!2seg!4v1774723191524!5m2!1sen!2seg" width="100%"
                 height="280"
                 style={{ border: 0 }}
-                allowFullScreen
-                loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
-                className="rounded-3xl"
-              />
+                allowFullScreen loading="lazy" 
+                referrerPolicy="no-referrer-when-downgrade"></iframe>
             </div>
 
             {/* Quick Contact CTA */}
@@ -356,3 +352,4 @@ export default function ContactSection() {
     </section>
   );
 }
+

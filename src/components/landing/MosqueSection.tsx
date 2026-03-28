@@ -101,7 +101,7 @@ export default function MosqueSection() {
               playsInline
               poster={`${basePath}/assets/mosque.jpg`}
             >
-              <source src={`${basePath}/assets/logo.png`} type="video/mp4" />
+              <source src={`${basePath}/assets/mosque.mp4`} type="video/mp4" />
               {t('videoNotSupported')}
             </video>
 
