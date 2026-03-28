@@ -59,22 +59,20 @@ export default function Hero() {
       {/* Content */}
       <div className="container mx-auto px-4 relative z-10 py-20">
         <div className="max-w-4xl mx-auto text-center">
-          {/* Badge */}
-          <div 
-            className={clsx(
-              "inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 mb-6 opacity-0",
-              isRTL && "font-arabic",
-              isLoaded && "animate-fade-in-down"
-            )}
-          >
-            <span className="w-2 h-2 bg-secondary-400 rounded-full animate-pulse" />
-            <span className="text-secondary-200 text-sm font-medium">
-              {locale === 'ar' ? 'معاً نحو مستقبل أفضل' : 'Together for a Better Future'}
-            </span>
+          {/* show logo image with white container */}
+          <div className="bg-white p-4 mb-8 inline-flex items-center justify-center rounded-lg aspect-square w-32 h-32">
+            <div className="w-full h-full flex items-center justify-center">
+              <Image
+                src={`${basePath}/assets/logo.png`}
+                alt="ElDeep Charity Logo"
+                width={96}
+                height={96}
+                className="mx-auto"
+              />
+            </div>
           </div>
-
           {/* Main Title */}
-          <h1 
+          <h2
             className={clsx(
               "text-3xl md:text-4xl lg:text-5xl font-bold mb-6 leading-tight opacity-0",
               isRTL && "font-arabic",
@@ -84,9 +82,9 @@ export default function Hero() {
           >
             <span className="block text-white">{t('title')}</span>
             <span className="block mt-2 bg-gradient-to-r from-secondary-300 via-secondary-200 to-secondary-400 bg-clip-text text-transparent">
-              {locale === 'ar' ? 'الأمل يبدأ من هنا' : 'Hope Starts Here'}
+              {locale === 'ar' ?"خير وابقي" : 'Hope Starts Here'}
             </span>
-          </h1>
+          </h2>
 
           {/* Subtitle */}
           <p 

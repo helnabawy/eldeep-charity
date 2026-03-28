@@ -4,6 +4,7 @@ import {
   Hero,
   Stats,
   AboutSection,
+  MosqueSection,
   ProjectsSection,
   DonationSection,
   ContactSection,
@@ -46,6 +47,7 @@ export default async function HomePage({ params: { locale } }: { params: { local
         <Hero />
         <Stats />
         <AboutSection />
+        <MosqueSection />
         <ProjectsSection projects={projects} />
         <DonationSection />
         <ContactSection />

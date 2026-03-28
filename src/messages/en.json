@@ -6,6 +6,7 @@
   "nav": {
     "home": "Home",
     "about": "About Us",
+    "mosque": "Mosque",
     "projects": "Projects",
     "donate": "Donate",
     "contact": "Contact Us"
@@ -36,6 +37,23 @@
       "cooperation": "Cooperation",
       "cooperationDesc": "We believe in the power of teamwork and community collaboration"
     }
+  },
+  "mosque": {
+    "badge": "Our Mosque",
+    "title": "Al Deeb Mosque",
+    "subtitle": "A beacon of faith and community gathering",
+    "videoTitle": "Mosque Tour",
+    "videoDescription": "Explore our beautiful mosque",
+    "videoNotSupported": "Your browser does not support the video tag.",
+    "locationTitle": "Mosque Location",
+    "locationSubtitle": "New Administrative Capital, Cairo Governorate",
+    "getDirections": "Get Directions",
+    "card1Title": "Prayer Hall",
+    "card1Description": "A spacious and peaceful prayer hall accommodating hundreds of worshippers for daily prayers and Friday congregations",
+    "card2Title": "Prayer Times",
+    "card2Description": "Join us for all five daily prayers. Our doors are open from Fajr to Isha for the community",
+    "card3Title": "Community Hub",
+    "card3Description": "The mosque serves as a center for community gatherings, Islamic education, and social activities"
   },
   "projects": {
     "title": "Our Projects",

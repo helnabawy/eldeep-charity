@@ -1,5 +1,6 @@
 'use client';
 
+import Image from 'next/image';
 import Link from 'next/link';
 import { useTranslations, useLocale } from 'next-intl';
 import { useState, useEffect } from 'react';
@@ -27,6 +28,7 @@ export default function Header() {
   const navLinks = [
     { href: '#home', label: t('home'), isAnchor: true },
     { href: '#about', label: t('about'), isAnchor: true },
+    { href: '#mosque', label: t('mosque'), isAnchor: true },
     { href: '#projects', label: t('projects'), isAnchor: true },
     { href: '#donate', label: t('donate'), isAnchor: true },
     { href: '#contact', label: t('contact'), isAnchor: true },
@@ -50,20 +52,8 @@ export default function Header() {
             href={`/${locale}`} 
             className="flex items-center gap-3 group"
           >
-            <div className={clsx(
-              "relative w-12 h-12 rounded-2xl flex items-center justify-center transition-all duration-300 group-hover:scale-110",
-              isScrolled 
-                ? "bg-gradient-to-br from-primary-500 to-primary-700 shadow-glow-sm" 
-                : "bg-white/20 backdrop-blur-sm border border-white/30"
-            )}>
-              <Heart className={clsx(
-                "w-6 h-6 transition-colors",
-                isScrolled ? "text-white" : "text-secondary-300"
-              )} />
-              <div className="absolute -bottom-1 -right-1 w-4 h-4 bg-secondary-400 rounded-full flex items-center justify-center">
-                <span className="text-primary-900 font-bold text-xs">أ</span>
-              </div>
-            </div>
+            {/* Add logo image */}
+              <Image src="/assets/logo.png" alt="Al Deeb Logo" width={40} height={40} className="rounded-full group-hover:animate-pulse" />
             <div className="flex flex-col">
               <span className={clsx(
                 "font-bold text-lg transition-colors",
@@ -77,7 +67,7 @@ export default function Header() {
                 isScrolled ? "text-primary-600" : "text-primary-100",
                 isRTL && "font-arabic"
               )}>
-                {locale === 'ar' ? 'للأعمال الخيرية' : 'Charity'}
+                {locale === 'ar' ? 'الخيرية' : 'Charity'}
               </span>
             </div>
           </Link>

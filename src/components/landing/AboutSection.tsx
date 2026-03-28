@@ -33,6 +33,7 @@ export default function AboutSection() {
   const values = [
     { key: 'transparency', icon: Shield },
     { key: 'credibility', icon: Sparkles },
+    { key: 'commitment', icon: Sparkles },
     { key: 'cooperation', icon: Users },
   ];
 
@@ -137,9 +138,11 @@ export default function AboutSection() {
           <div 
             className={clsx(
               "group relative md:row-span-1 opacity-0",
-              isVisible && "animate-fade-in-up"
+              isVisible && "animate-fade-in-up",
+              isRTL ? "text-right" : "text-left"
             )}
             style={{ animationDelay: '0.4s' }}
+            dir={isRTL ? 'rtl' : 'ltr'}
           >
             <div className="absolute inset-0 bg-gradient-to-br from-primary-400 to-secondary-400 rounded-2xl transform rotate-1 group-hover:rotate-0 transition-transform duration-500" />
             <div className="relative bg-white rounded-2xl p-6 shadow-elegant hover:shadow-elegant-lg transition-all duration-500 hover:-translate-y-2 h-full">
@@ -150,27 +153,27 @@ export default function AboutSection() {
               {/* Content */}
               <h3 className={clsx(
                 "text-lg font-bold text-primary-900 mb-4",
-                isRTL && "font-arabic"
+                isRTL ? "font-arabic text-right" : "text-left"
               )}>
                 {t('values.title')}
               </h3>
-              <ul className="space-y-3">
+              <ul className={clsx("space-y-3", isRTL ? "text-right" : "text-left")} dir={isRTL ? "rtl" : "ltr"}>
                 {values.map((value, index) => (
                   <li 
                     key={value.key} 
                     className={clsx(
                       "flex items-start gap-2 group/item",
-                      isRTL && "flex-row-reverse"
+                      isRTL ? "flex-row-reverse" : "flex-row"
                     )}
                   >
-                    <div className="w-7 h-7 bg-primary-100 rounded-lg flex items-center justify-center shrink-0 group-hover/item:bg-primary-200 transition-colors duration-300">
+                    <div className={clsx("w-7 h-7 bg-primary-100 rounded-lg flex items-center justify-center shrink-0 group-hover/item:bg-primary-200 transition-colors duration-300", isRTL ? "order-2" : "order-1")}>
                       <value.icon size={14} className="text-primary-600" />
                     </div>
-                    <div className={clsx(isRTL && "text-right")}>
-                      <span className="font-semibold text-primary-800 text-sm">
+                    <div className={clsx(isRTL ? "text-right order-1" : "text-left order-2", isRTL && "font-arabic") }>
+                      <span className="block font-semibold text-primary-800 text-sm">
                         {t(`values.${value.key}`)}:
                       </span>
-                      <span className={clsx("text-gray-600 text-sm mr-1", isRTL && "font-arabic mr-0 ml-1")}>
+                      <span className={clsx("block text-gray-600 text-sm", isRTL ? "mr-0 ml-1" : "mr-1")}>
                         {t(`values.${value.key}Desc`)}
                       </span>
                     </div>

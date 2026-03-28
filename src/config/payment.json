@@ -1,0 +1,53 @@
+{
+  "instapay": {
+    "link": "https://ipn.eg/alddeeb",
+    "instructions": {
+      "en": [
+        "Click the link above to open Instapay",
+        "Log in to your Instapay account",
+        "Enter the donation amount",
+        "Confirm the transaction"
+      ],
+      "ar": [
+        "ادخل علي القائمة الرئيسية واختر ارسال النقود",
+        "اضغط علي حساب البنك",
+        "اختر اسم البنك المراد التحويل اليه ",
+        "ادخل البيانات المطلوبة",
+        "اضغط علي التالي",
+        "راجع بيانات التحويل واضغط علي تأكيد",
+        "ادخل الرقم السري IPN PIN",
+        "اضغط ارسال"
+      ]
+    }
+  },
+  "bankTransfer": [
+    {
+      "bankName": {
+        "en": "Bank of Egypt",
+        "ar": "البنك العقاري المصري العربي"
+      },
+      "accountNumber": "12703000305020000127",
+      "accountName": {
+        "en": "Al Deeb Charity Foundation",
+        "ar": "مؤسسة آل الديب الخيرية (الزكاة)"
+      },
+      "iban": "",
+      "swiftCode": ""
+    },
+    {
+      "bankName": {
+        "en": "Bank of Egypt",
+        "ar": "البنك العقاري المصري العربي"
+      },
+      "accountNumber": "12703000315020000127",
+      "accountName": {
+        "en": "Al Deeb Charity Foundation",
+        "ar": "مؤسسة آل الديب الخيرية (الصدقات)"
+      },
+      "iban": "",
+      "swiftCode": ""
+    }
+  ]
+  
+}
+
